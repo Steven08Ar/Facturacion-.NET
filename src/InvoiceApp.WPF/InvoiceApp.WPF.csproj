@@ -1,0 +1,33 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net9.0-windows</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <UseWPF>true</UseWPF>
+    <ApplicationDefinition>App.xaml</ApplicationDefinition>
+    <RootNamespace>InvoiceApp.WPF</RootNamespace>
+    <AssemblyName>InvoiceApp</AssemblyName>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Content Include="appsettings.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="CommunityToolkit.Mvvm" Version="8.4.0" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="10.0.3" />
+    <PackageReference Include="Microsoft.Extensions.Hosting" Version="10.0.3" />
+    <PackageReference Include="ModernWpfUI" Version="0.9.6" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\InvoiceApp.Application\InvoiceApp.Application.csproj" />
+    <ProjectReference Include="..\InvoiceApp.Infrastructure\InvoiceApp.Infrastructure.csproj" />
+    <ProjectReference Include="..\InvoiceApp.Domain\InvoiceApp.Domain.csproj" />
+  </ItemGroup>
+
+</Project>

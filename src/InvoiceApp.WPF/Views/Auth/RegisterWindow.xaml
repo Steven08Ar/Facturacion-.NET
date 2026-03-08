@@ -1,0 +1,87 @@
+<Window x:Class="InvoiceApp.WPF.Views.Auth.RegisterWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:ui="http://schemas.modernwpf.com/2019"
+        xmlns:conv="clr-namespace:InvoiceApp.WPF.Converters"
+        ui:WindowHelper.UseModernWindowStyle="True"
+        Title="InvoiceApp — Registrar Empresa"
+        Width="560" Height="680"
+        MinWidth="560" MinHeight="680"
+        WindowStartupLocation="CenterOwner"
+        ResizeMode="NoResize">
+
+    <Window.Resources>
+        <conv:StringToVisibilityConverter x:Key="StringToVisibilityConverter"/>
+        <conv:BoolInverseConverter x:Key="BoolInverseConverter"/>
+    </Window.Resources>
+
+    <Border Background="White" Padding="40">
+        <ScrollViewer VerticalScrollBarVisibility="Auto">
+            <StackPanel>
+                <!-- Header -->
+                <TextBlock Text="🏢" FontSize="40" HorizontalAlignment="Center" Margin="0,0,0,12"/>
+                <TextBlock Text="Registrar Nueva Empresa" FontSize="22" FontWeight="Bold"
+                           HorizontalAlignment="Center" Foreground="{StaticResource TextPrimaryBrush}" Margin="0,0,0,6"/>
+                <TextBlock Text="Completa los datos para comenzar" FontSize="13" Foreground="#64748B"
+                           HorizontalAlignment="Center" Margin="0,0,0,28"/>
+
+                <!-- Status Messages -->
+                <Border Background="#FEF2F2" CornerRadius="6" Padding="12,10"
+                        Margin="0,0,0,12"
+                        Visibility="{Binding ErrorMessage, Converter={StaticResource StringToVisibilityConverter}}">
+                    <TextBlock Text="{Binding ErrorMessage}" FontSize="13" Foreground="{StaticResource DangerBrush}" TextWrapping="Wrap"/>
+                </Border>
+                <Border Background="#F0FDF4" CornerRadius="6" Padding="12,10"
+                        Margin="0,0,0,12"
+                        Visibility="{Binding SuccessMessage, Converter={StaticResource StringToVisibilityConverter}}">
+                    <TextBlock Text="{Binding SuccessMessage}" FontSize="13" Foreground="#15803D" TextWrapping="Wrap"/>
+                </Border>
+
+                <!-- Section: Datos empresa -->
+                <Border Background="#F8FAFC" CornerRadius="8" Padding="16" Margin="0,0,0,16">
+                    <StackPanel>
+                        <TextBlock Text="DATOS DE LA EMPRESA" FontSize="11" FontWeight="Bold"
+                                   Foreground="{StaticResource SecondaryBrush}" Margin="0,0,0,16"/>
+
+                        <TextBlock Text="NOMBRE EMPRESA" Style="{StaticResource FormLabelStyle}"/>
+                        <TextBox Text="{Binding CompanyName, UpdateSourceTrigger=PropertyChanged}"
+                                 Style="{StaticResource FormTextBoxStyle}" Margin="0,0,0,12"/>
+
+                        <TextBlock Text="NIT / IDENTIFICACIÓN FISCAL" Style="{StaticResource FormLabelStyle}"/>
+                        <TextBox Text="{Binding TaxId, UpdateSourceTrigger=PropertyChanged}"
+                                 Style="{StaticResource FormTextBoxStyle}"/>
+                    </StackPanel>
+                </Border>
+
+                <!-- Section: Datos admin -->
+                <Border Background="#F8FAFC" CornerRadius="8" Padding="16" Margin="0,0,0,24">
+                    <StackPanel>
+                        <TextBlock Text="DATOS DEL ADMINISTRADOR" FontSize="11" FontWeight="Bold"
+                                   Foreground="{StaticResource SecondaryBrush}" Margin="0,0,0,16"/>
+
+                        <TextBlock Text="NOMBRE COMPLETO" Style="{StaticResource FormLabelStyle}"/>
+                        <TextBox Text="{Binding AdminFullName, UpdateSourceTrigger=PropertyChanged}"
+                                 Style="{StaticResource FormTextBoxStyle}" Margin="0,0,0,12"/>
+
+                        <TextBlock Text="CORREO ELECTRÓNICO" Style="{StaticResource FormLabelStyle}"/>
+                        <TextBox Text="{Binding AdminEmail, UpdateSourceTrigger=PropertyChanged}"
+                                 Style="{StaticResource FormTextBoxStyle}" Margin="0,0,0,12"/>
+
+                        <TextBlock Text="CONTRASEÑA" Style="{StaticResource FormLabelStyle}"/>
+                        <PasswordBox x:Name="PasswordBox" Style="{StaticResource FormPasswordBoxStyle}"
+                                     PasswordChanged="PasswordBox_PasswordChanged"/>
+                    </StackPanel>
+                </Border>
+
+                <!-- Buttons -->
+                <Button Content="CREAR EMPRESA" Style="{StaticResource PrimaryButtonStyle}"
+                        Command="{Binding RegisterCommand}"
+                        HorizontalAlignment="Stretch" Height="44" Margin="0,0,0,12"
+                        IsEnabled="{Binding IsLoading, Converter={StaticResource BoolInverseConverter}}"/>
+                <Button Content="Cancelar" Style="{StaticResource GhostButtonStyle}"
+                        Click="CancelButton_Click"
+                        HorizontalAlignment="Stretch" Height="40"/>
+            </StackPanel>
+        </ScrollViewer>
+    </Border>
+</Window>
