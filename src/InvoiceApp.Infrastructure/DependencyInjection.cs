@@ -34,7 +34,7 @@ public static class DependencyInjection
         services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
 
         // Identity Registration
-        services.AddIdentity<User, IdentityRole<Guid>>(options => 
+        services.AddIdentity<User, IdentityRole>(options => 
         {
             options.Password.RequireDigit = true;
             options.Password.RequiredLength = 8;
