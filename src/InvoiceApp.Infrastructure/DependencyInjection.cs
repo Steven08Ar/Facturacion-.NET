@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using System.IO;
 
 namespace InvoiceApp.Infrastructure;
 
@@ -20,8 +21,12 @@ public static class DependencyInjection
 
         services.AddDbContext<ApplicationDbContext>((sp, options) =>
         {
-            options.UseSqlServer(
-                configuration.GetConnectionString("DefaultConnection"),
+            // SQLite: no requiere SQL Server instalado, la BD se crea
+            // automáticamente como archivo .db junto al ejecutable.
+            var dbPath = Path.Combine(
+                AppDomain.CurrentDomain.BaseDirectory,
+                "InvoiceApp.db");
+            options.UseSqlite($"Data Source={dbPath}",
                 b => b.MigrationsAssembly(typeof(ApplicationDbContext).Assembly.FullName));
         });
 
