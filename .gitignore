@@ -65,3 +65,6 @@ Thumbs.db
 
 # EF Core Tools
 appsettings.Development.json
+
+# Carpetas de binarios combinados
+Ejecutables/
