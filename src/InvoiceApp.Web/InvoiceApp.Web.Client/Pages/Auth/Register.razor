@@ -1,0 +1,108 @@
+@page "/register"
+@layout InvoiceApp.Web.Client.Layout.MainLayout
+@inject HttpClient Http
+@inject NavigationManager NavigationManager
+@inject ISnackbar Snackbar
+
+<MudContainer MaxWidth="MaxWidth.Medium" Class="mt-10">
+    <MudText Typo="Typo.h4" Align="Align.Center" Class="mb-4" Color="Color.Primary"><b>Registro de Empresa</b></MudText>
+    <MudText Typo="Typo.subtitle1" Align="Align.Center" Class="mb-8">Únete a InvoiceApp y gestiona tu facturación.</MudText>
+
+    @if (!string.IsNullOrEmpty(_error))
+    {
+        <MudAlert Severity="Severity.Error" Class="mb-4">@_error</MudAlert>
+    }
+
+    <MudPaper Elevation="3" Class="pa-8">
+        <MudForm @ref="form" @bind-IsValid="@success">
+            <MudGrid>
+                <MudItem xs="12">
+                    <MudText Typo="Typo.h6">Datos de la Empresa</MudText>
+                    <MudDivider Class="mb-4" />
+                </MudItem>
+                <MudItem xs="12" sm="6">
+                    <MudTextField @bind-Value="model.CompanyName" Label="Nombre de Empresa" Variant="Variant.Outlined" Required="true" RequiredError="Requerido" />
+                </MudItem>
+                <MudItem xs="12" sm="6">
+                    <MudTextField @bind-Value="model.TaxId" Label="NIT/RUT (Identificación Fiscal)" Variant="Variant.Outlined" Required="true" RequiredError="Requerido" />
+                </MudItem>
+
+                <MudItem xs="12" Class="mt-4">
+                    <MudText Typo="Typo.h6">Datos del Administrador</MudText>
+                    <MudDivider Class="mb-4" />
+                </MudItem>
+                <MudItem xs="12" sm="6">
+                    <MudTextField @bind-Value="model.AdminFullName" Label="Nombre Completo" Variant="Variant.Outlined" Required="true" RequiredError="Requerido" />
+                </MudItem>
+                <MudItem xs="12" sm="6">
+                    <MudTextField @bind-Value="model.AdminEmail" Label="Correo Electrónico" Variant="Variant.Outlined" Required="true" RequiredError="Requerido" InputType="InputType.Email" />
+                </MudItem>
+                <MudItem xs="12" sm="6">
+                    <MudTextField @bind-Value="model.Password" Label="Contraseña" Variant="Variant.Outlined" Required="true" RequiredError="Requerido" InputType="InputType.Password" />
+                </MudItem>
+
+                <MudItem xs="12" Class="d-flex justify-end mt-4">
+                    <MudButton Variant="Variant.Text" Color="Color.Default" Href="/login" Class="mr-2">CANCELAR</MudButton>
+                    <MudButton Variant="Variant.Filled" Color="Color.Primary" Size="Size.Large" OnClick="Submit" Disabled="@_loading">
+                        @if (_loading)
+                        {
+                            <MudProgressCircular Class="ms-n1" Size="Size.Small" Indeterminate="true" />
+                            <MudText Class="ms-2">REGISTRANDO</MudText>
+                        }
+                        else
+                        {
+                            <MudText>CREAR CUENTA</MudText>
+                        }
+                    </MudButton>
+                </MudItem>
+            </MudGrid>
+        </MudForm>
+    </MudPaper>
+</MudContainer>
+
+@code {
+    bool success;
+    bool _loading = false;
+    string _error = "";
+    MudForm form;
+
+    RegisterModel model = new RegisterModel();
+
+    public class RegisterModel
+    {
+        public string CompanyName { get; set; } = "";
+        public string TaxId { get; set; } = "";
+        public string AdminEmail { get; set; } = "";
+        public string AdminFullName { get; set; } = "";
+        public string Password { get; set; } = "";
+    }
+
+    private async Task Submit()
+    {
+        await form.Validate();
+        if (form.IsValid)
+        {
+            _loading = true;
+            _error = "";
+            var response = await Http.PostAsJsonAsync("api/auth/register", model);
+
+            if (response.IsSuccessStatusCode)
+            {
+                Snackbar.Add("¡Empresa registrada exitosamente! Puedes iniciar sesión.", Severity.Success);
+                NavigationManager.NavigateTo("/login");
+            }
+            else
+            {
+                var errorResult = await response.Content.ReadFromJsonAsync<ErrorResponse>();
+                _error = errorResult?.Error ?? "Ocurrió un error en el registro.";
+                Snackbar.Add(_error, Severity.Error);
+            }
+            _loading = false;
+        }
+    }
+
+    public class ErrorResponse
+    {
+        public string Error { get; set; }
+    }
+}

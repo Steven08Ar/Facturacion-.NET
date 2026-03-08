@@ -1,0 +1,79 @@
+@page "/login"
+@layout InvoiceApp.Web.Client.Layout.MainLayout
+@inject InvoiceApp.Web.Client.Services.IAuthService AuthService
+@inject NavigationManager NavigationManager
+@inject ISnackbar Snackbar
+
+<MudContainer MaxWidth="MaxWidth.Small" Class="mt-16">
+    <MudPaper Elevation="4" Class="pa-8 ma-2 flex-column align-center justify-center">
+        <div class="d-flex justify-center mb-4">
+            <MudIcon Icon="@Icons.Material.Filled.Receipt" Color="Color.Primary" Size="Size.Large" Style="font-size: 4rem;" />
+        </div>
+        <MudText Typo="Typo.h4" Align="Align.Center" Class="mb-6" Color="Color.Primary"><b>InvoiceApp</b></MudText>
+        <MudText Typo="Typo.subtitle1" Align="Align.Center" Class="mb-8">Inicio de Sesión Enterprise</MudText>
+
+        @if (!string.IsNullOrEmpty(_error))
+        {
+            <MudAlert Severity="Severity.Error" Class="mb-4">@_error</MudAlert>
+        }
+
+        <MudForm @ref="form" @bind-IsValid="@success">
+            <MudTextField @bind-Value="model.Email" Label="Correo Electrónico" Variant="Variant.Outlined" Required="true" RequiredError="Correo es requerido" Class="mb-4" />
+            <MudTextField @bind-Value="model.Password" Label="Contraseña" Variant="Variant.Outlined" Required="true" RequiredError="Contraseña es requerida" InputType="InputType.Password" Class="mb-6" />
+
+            <MudButton Variant="Variant.Filled" Color="Color.Secondary" Size="Size.Large" FullWidth="true" OnClick="Submit" Disabled="@_loading">
+                @if (_loading)
+                {
+                    <MudProgressCircular Class="ms-n1" Size="Size.Small" Indeterminate="true" />
+                    <MudText Class="ms-2">INGRESANDO</MudText>
+                }
+                else
+                {
+                    <MudText>INICIAR SESIÓN</MudText>
+                }
+            </MudButton>
+        </MudForm>
+
+        <MudText Align="Align.Center" Class="mt-6">
+            ¿No tienes cuenta de Empresa? <MudLink Href="/register" Color="Color.Secondary">Regístrate aquí</MudLink>
+        </MudText>
+    </MudPaper>
+</MudContainer>
+
+@code {
+    bool success;
+    bool _loading = false;
+    string _error = "";
+    MudForm form;
+
+    LoginModel model = new LoginModel();
+
+    public class LoginModel
+    {
+        public string Email { get; set; } = "";
+        public string Password { get; set; } = "";
+    }
+
+    private async Task Submit()
+    {
+        await form.Validate();
+        if (form.IsValid)
+        {
+            _loading = true;
+            _error = "";
+            var resultError = await AuthService.LoginAsync(model.Email, model.Password);
+
+            if (resultError == null) // Succes
+            {
+                Snackbar.Add("Inicio de sesión exitoso", Severity.Success);
+                NavigationManager.NavigateTo("/");
+            }
+            else
+            {
+                _error = resultError;
+                Snackbar.Add(_error, Severity.Error);
+            }
+            _loading = false;
+        }
+    }
+}

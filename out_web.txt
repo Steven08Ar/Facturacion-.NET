@@ -1,0 +1,21 @@
+  Determinando los proyectos que se van a restaurar...
+  Todos los proyectos est??n actualizados para la restauraci??n.
+  InvoiceApp.IntegrationTests -> C:\Users\Santiago\Documents\Proyectos\.NET\Facturaci??n\tests\InvoiceApp.IntegrationTests\bin\Debug\net9.0\InvoiceApp.IntegrationTests.dll
+  InvoiceApp.E2ETests -> C:\Users\Santiago\Documents\Proyectos\.NET\Facturaci??n\tests\InvoiceApp.E2ETests\bin\Debug\net9.0\InvoiceApp.E2ETests.dll
+  InvoiceApp.UnitTests -> C:\Users\Santiago\Documents\Proyectos\.NET\Facturaci??n\tests\InvoiceApp.UnitTests\bin\Debug\net9.0\InvoiceApp.UnitTests.dll
+  InvoiceApp.Domain -> C:\Users\Santiago\Documents\Proyectos\.NET\Facturaci??n\src\InvoiceApp.Domain\bin\Debug\net9.0\InvoiceApp.Domain.dll
+  InvoiceApp.Application -> C:\Users\Santiago\Documents\Proyectos\.NET\Facturaci??n\src\InvoiceApp.Application\bin\Debug\net9.0\InvoiceApp.Application.dll
+C:\Users\Santiago\Documents\Proyectos\.NET\Facturaci??n\src\InvoiceApp.Infrastructure\Persistence\ApplicationDbContext.cs(27,24): warning CS0114: 'ApplicationDbContext.Users' oculta el miembro heredado 'IdentityUserContext<User, string, IdentityUserClaim<string>, IdentityUserLogin<string>, IdentityUserToken<string>>.Users'. Para hacer que el miembro actual invalide esa implementaci??n, agregue la palabra clave override. Si no, agregue la palabra clave new. [C:\Users\Santiago\Documents\Proyectos\.NET\Facturaci??n\src\InvoiceApp.Infrastructure\InvoiceApp.Infrastructure.csproj]
+  InvoiceApp.Infrastructure -> C:\Users\Santiago\Documents\Proyectos\.NET\Facturaci??n\src\InvoiceApp.Infrastructure\bin\Debug\net9.0\InvoiceApp.Infrastructure.dll
+C:\Users\Santiago\Documents\Proyectos\.NET\Facturaci??n\src\InvoiceApp.API\Program.cs(5,43): error CS0234: El tipo o el nombre del espacio de nombres 'JwtBearer' no existe en el espacio de nombres 'Microsoft.AspNetCore.Authentication' (??falta alguna referencia de ensamblado?) [C:\Users\Santiago\Documents\Proyectos\.NET\Facturaci??n\src\InvoiceApp.API\InvoiceApp.API.csproj]
+C:\Users\Santiago\Documents\Proyectos\.NET\Facturaci??n\src\InvoiceApp.API\Program.cs(7,25): error CS0234: El tipo o el nombre del espacio de nombres 'Models' no existe en el espacio de nombres 'Microsoft.OpenApi' (??falta alguna referencia de ensamblado?) [C:\Users\Santiago\Documents\Proyectos\.NET\Facturaci??n\src\InvoiceApp.API\InvoiceApp.API.csproj]
+
+ERROR al compilar.
+
+C:\Users\Santiago\Documents\Proyectos\.NET\Facturaci??n\src\InvoiceApp.Infrastructure\Persistence\ApplicationDbContext.cs(27,24): warning CS0114: 'ApplicationDbContext.Users' oculta el miembro heredado 'IdentityUserContext<User, string, IdentityUserClaim<string>, IdentityUserLogin<string>, IdentityUserToken<string>>.Users'. Para hacer que el miembro actual invalide esa implementaci??n, agregue la palabra clave override. Si no, agregue la palabra clave new. [C:\Users\Santiago\Documents\Proyectos\.NET\Facturaci??n\src\InvoiceApp.Infrastructure\InvoiceApp.Infrastructure.csproj]
+C:\Users\Santiago\Documents\Proyectos\.NET\Facturaci??n\src\InvoiceApp.API\Program.cs(5,43): error CS0234: El tipo o el nombre del espacio de nombres 'JwtBearer' no existe en el espacio de nombres 'Microsoft.AspNetCore.Authentication' (??falta alguna referencia de ensamblado?) [C:\Users\Santiago\Documents\Proyectos\.NET\Facturaci??n\src\InvoiceApp.API\InvoiceApp.API.csproj]
+C:\Users\Santiago\Documents\Proyectos\.NET\Facturaci??n\src\InvoiceApp.API\Program.cs(7,25): error CS0234: El tipo o el nombre del espacio de nombres 'Models' no existe en el espacio de nombres 'Microsoft.OpenApi' (??falta alguna referencia de ensamblado?) [C:\Users\Santiago\Documents\Proyectos\.NET\Facturaci??n\src\InvoiceApp.API\InvoiceApp.API.csproj]
+    1 Advertencia(s)
+    2 Errores
+
+Tiempo transcurrido 00:00:03.85
