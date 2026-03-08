@@ -66,5 +66,9 @@ Thumbs.db
 # EF Core Tools
 appsettings.Development.json
 
-# Carpetas de binarios combinados
-Ejecutables/
+# Carpeta de binarios publicados
+publish/
+
+# Archivos temporales de build
+*.txt
+!README.txt
