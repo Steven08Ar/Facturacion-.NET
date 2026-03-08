@@ -1,0 +1,15 @@
+  Determinando los proyectos que se van a restaurar...
+  Todos los proyectos est??n actualizados para la restauraci??n.
+  InvoiceApp.E2ETests -> C:\Users\Santiago\.gemini\antigravity\scratch\InvoiceApp\tests\InvoiceApp.E2ETests\bin\Debug\net9.0\InvoiceApp.E2ETests.dll
+  InvoiceApp.IntegrationTests -> C:\Users\Santiago\.gemini\antigravity\scratch\InvoiceApp\tests\InvoiceApp.IntegrationTests\bin\Debug\net9.0\InvoiceApp.IntegrationTests.dll
+  InvoiceApp.UnitTests -> C:\Users\Santiago\.gemini\antigravity\scratch\InvoiceApp\tests\InvoiceApp.UnitTests\bin\Debug\net9.0\InvoiceApp.UnitTests.dll
+  InvoiceApp.Domain -> C:\Users\Santiago\.gemini\antigravity\scratch\InvoiceApp\src\InvoiceApp.Domain\bin\Debug\net9.0\InvoiceApp.Domain.dll
+  InvoiceApp.Application -> C:\Users\Santiago\.gemini\antigravity\scratch\InvoiceApp\src\InvoiceApp.Application\bin\Debug\net9.0\InvoiceApp.Application.dll
+  InvoiceApp.Infrastructure -> C:\Users\Santiago\.gemini\antigravity\scratch\InvoiceApp\src\InvoiceApp.Infrastructure\bin\Debug\net9.0\InvoiceApp.Infrastructure.dll
+  InvoiceApp.API -> C:\Users\Santiago\.gemini\antigravity\scratch\InvoiceApp\src\InvoiceApp.API\bin\Debug\net9.0\InvoiceApp.API.dll
+
+Compilaci??n correcta.
+    0 Advertencia(s)
+    0 Errores
+
+Tiempo transcurrido 00:00:02.66
