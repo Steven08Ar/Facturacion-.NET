@@ -1,7 +1,10 @@
 using InvoiceApp.Application.Common.Interfaces;
+using InvoiceApp.Domain.Entities;
+using InvoiceApp.Infrastructure.Identity;
 using InvoiceApp.Infrastructure.Persistence;
 using InvoiceApp.Infrastructure.Persistence.Interceptors;
 using InvoiceApp.Infrastructure.Persistence.Repositories;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -17,15 +20,29 @@ public static class DependencyInjection
 
         services.AddDbContext<ApplicationDbContext>((sp, options) =>
         {
-            // Use SQL Server inside Program.cs usually, or here
             options.UseSqlServer(
                 configuration.GetConnectionString("DefaultConnection"),
                 b => b.MigrationsAssembly(typeof(ApplicationDbContext).Assembly.FullName));
-                // Interceptors are added via OnConfiguring in DbContext
         });
 
         services.AddScoped<IApplicationDbContext>(provider => provider.GetRequiredService<ApplicationDbContext>());
         services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
+
+        // Identity Registration
+        services.AddIdentity<User, IdentityRole<Guid>>(options => 
+        {
+            options.Password.RequireDigit = true;
+            options.Password.RequiredLength = 8;
+            options.Password.RequireNonAlphanumeric = true;
+            options.Password.RequireUppercase = true;
+            options.Password.RequireLowercase = true;
+        })
+        .AddEntityFrameworkStores<ApplicationDbContext>()
+        .AddDefaultTokenProviders();
+
+        // JWT config
+        services.Configure<JwtSettings>(configuration.GetSection(JwtSettings.SectionName));
+        services.AddSingleton<IJwtTokenGenerator, JwtTokenGenerator>();
 
         return services;
     }
