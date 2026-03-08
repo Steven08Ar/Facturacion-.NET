@@ -55,5 +55,3 @@ El sistema está diseñado para ser altamente escalable y agnóstico a la UI, of
 - [ ] **Módulo 8: Pagos**. Registro y seguimiento.
 - [ ] **Módulo 9: Reportes**.
 - [ ] **Módulo 10: Configuración y Auditoría**.
-
-Desarrollado con ♥ por tu Arquitecto .NET.

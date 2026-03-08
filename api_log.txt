@@ -1,0 +1,1 @@
+C:\Users\Santiago\Documents\Proyectos\.NET\Facturaci??n\src\InvoiceApp.API\InvoiceApp.API.csproj(27,3): error MSB4025: No se pudo cargar el archivo del proyecto. The 'ItemGroup' start tag on line 9 position 4 does not match the end tag of 'Project'. Line 27, position 3.

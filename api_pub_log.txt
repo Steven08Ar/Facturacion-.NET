@@ -1,0 +1,8 @@
+  Determinando los proyectos que se van a restaurar...
+  Se ha restaurado C:\Users\Santiago\Documents\Proyectos\.NET\Facturaci??n\src\InvoiceApp.Domain\InvoiceApp.Domain.csproj (en 568 ms).
+  Se ha restaurado C:\Users\Santiago\Documents\Proyectos\.NET\Facturaci??n\src\InvoiceApp.Application\InvoiceApp.Application.csproj (en 568 ms).
+C:\Users\Santiago\Documents\Proyectos\.NET\Facturaci??n\src\InvoiceApp.API\InvoiceApp.API.csproj : error NU1605: Advertencia como error: Degradaci??n del paquete detectada: Microsoft.OpenApi de 2.4.1 a 1.6.22. Haga referencia al paquete directamente desde el proyecto para seleccionar una versi??n diferente. 
+C:\Users\Santiago\Documents\Proyectos\.NET\Facturaci??n\src\InvoiceApp.API\InvoiceApp.API.csproj : error NU1605:  InvoiceApp.API -> Swashbuckle.AspNetCore 10.1.4 -> Swashbuckle.AspNetCore.Swagger 10.1.4 -> Microsoft.OpenApi (>= 2.4.1) 
+C:\Users\Santiago\Documents\Proyectos\.NET\Facturaci??n\src\InvoiceApp.API\InvoiceApp.API.csproj : error NU1605:  InvoiceApp.API -> Microsoft.OpenApi (>= 1.6.22)
+  Se ha restaurado C:\Users\Santiago\Documents\Proyectos\.NET\Facturaci??n\src\InvoiceApp.Infrastructure\InvoiceApp.Infrastructure.csproj (en 647 ms).
+  No se pudo restaurar C:\Users\Santiago\Documents\Proyectos\.NET\Facturaci??n\src\InvoiceApp.API\InvoiceApp.API.csproj (en 666 ms).
