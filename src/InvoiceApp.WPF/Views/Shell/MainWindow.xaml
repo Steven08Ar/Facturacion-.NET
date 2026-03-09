@@ -8,149 +8,190 @@
         Width="1280" Height="800"
         MinWidth="1000" MinHeight="600"
         WindowStartupLocation="CenterScreen"
-        WindowState="Maximized">
+        WindowState="Maximized"
+        Background="{StaticResource SurfaceBrush}">
 
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="220"/>
+            <ColumnDefinition Width="240"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
 
-        <!-- ═══════ SIDEBAR ═══════ -->
-        <Border Grid.Column="0" Background="{StaticResource PrimaryBrush}">
+        <!-- ═══════ SIDEBAR MINIMALISTA BLANCA ═══════ -->
+        <Border Grid.Column="0" Background="{StaticResource SurfaceAltBrush}">
+            <!-- Sombra suave para separar el Sidebar del contenido -->
+            <Border.Effect>
+                <DropShadowEffect BlurRadius="20" Opacity="0.04" ShadowDepth="4" Color="#8C6B3F"/>
+            </Border.Effect>
+            
             <DockPanel>
-
                 <!-- Logo -->
-                <Border DockPanel.Dock="Top" Padding="20,28,20,20" BorderBrush="#FFFFFF14" BorderThickness="0,0,0,1">
-                    <StackPanel>
-                        <TextBlock Text="🧾 InvoiceApp" FontSize="18" FontWeight="Bold" Foreground="White"/>
-                        <TextBlock Text="Sistema Enterprise" FontSize="11" Foreground="#64748B" Margin="0,2,0,0"/>
+                <Border DockPanel.Dock="Top" Padding="24,32,24,24" BorderBrush="{StaticResource BorderBrush}" BorderThickness="0,0,0,1">
+                    <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                        <Border Background="{StaticResource PrimaryBrush}" Width="36" Height="36" CornerRadius="8" Padding="6">
+                            <TextBlock Text="🧾" FontSize="18" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                        <StackPanel Margin="12,0,0,0" VerticalAlignment="Center">
+                            <TextBlock Text="InvoiceApp" FontSize="18" FontWeight="Bold" Foreground="{StaticResource TextPrimaryBrush}"/>
+                            <TextBlock Text="Plataforma Cloud" FontSize="11" Foreground="{StaticResource TextSecondaryBrush}" Margin="0,2,0,0"/>
+                        </StackPanel>
                     </StackPanel>
                 </Border>
 
-                <!-- User Info -->
-                <Border DockPanel.Dock="Bottom" Padding="16,14" BorderBrush="#FFFFFF14" BorderThickness="0,1,0,0">
+                <!-- User Info (Abajo) -->
+                <Border DockPanel.Dock="Bottom" Padding="20,16" BorderBrush="{StaticResource BorderBrush}" BorderThickness="0,1,0,0">
                     <Grid>
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="36"/>
+                            <ColumnDefinition Width="40"/>
                             <ColumnDefinition Width="*"/>
                             <ColumnDefinition Width="Auto"/>
                         </Grid.ColumnDefinitions>
 
-                        <Border Grid.Column="0" Width="36" Height="36" CornerRadius="18" Background="{StaticResource SecondaryBrush}">
-                            <TextBlock Text="A" Foreground="White" FontWeight="Bold" FontSize="16"
+                        <Border Grid.Column="0" Width="40" Height="40" CornerRadius="20" Background="#FFF5EC">
+                            <TextBlock Text="A" Foreground="{StaticResource PrimaryBrush}" FontWeight="Bold" FontSize="16"
                                        HorizontalAlignment="Center" VerticalAlignment="Center"/>
                         </Border>
 
-                        <StackPanel Grid.Column="1" VerticalAlignment="Center" Margin="10,0,0,0">
-                            <TextBlock Text="{Binding CurrentUser}" Foreground="White" FontSize="13" FontWeight="SemiBold"
+                        <StackPanel Grid.Column="1" VerticalAlignment="Center" Margin="12,0,0,0">
+                            <TextBlock Text="{Binding CurrentUser}" Foreground="{StaticResource TextPrimaryBrush}" FontSize="13" FontWeight="SemiBold"
                                        TextTrimming="CharacterEllipsis"/>
-                            <TextBlock Text="Administrador" Foreground="#64748B" FontSize="11"/>
+                            <TextBlock Text="Administrador" Foreground="{StaticResource TextSecondaryBrush}" FontSize="12"/>
                         </StackPanel>
 
-                        <Button Grid.Column="2" Content="↩" Foreground="#64748B" Background="Transparent"
+                        <Button Grid.Column="2" Content="↪" Foreground="{StaticResource SecondaryBrush}" Background="Transparent"
                                 BorderThickness="0" FontSize="18" Cursor="Hand"
                                 Command="{Binding LogoutCommand}" ToolTip="Cerrar sesión"/>
                     </Grid>
                 </Border>
 
                 <!-- Navigation Menu -->
-                <StackPanel DockPanel.Dock="Top" Margin="0,16,0,0">
-                    <TextBlock Text="PRINCIPAL" FontSize="10" FontWeight="Bold" Foreground="#475569"
-                               Margin="20,0,0,8"/>
+                <ScrollViewer DockPanel.Dock="Top" VerticalScrollBarVisibility="Hidden" Margin="0,16,0,0">
+                    <StackPanel>
+                        <!-- Sección Principal -->
+                        <TextBlock Text="PRINCIPAL" FontSize="11" FontWeight="Bold" Foreground="{StaticResource TextSecondaryBrush}"
+                                   Margin="24,8,0,8"/>
 
-                    <Button Style="{StaticResource NavButtonStyle}"
-                            Command="{Binding NavigateToDashboardCommand}">
-                        <StackPanel Orientation="Horizontal">
-                            <TextBlock Text="📊" FontSize="16" Margin="0,0,12,0"/>
-                            <TextBlock Text="Dashboard"/>
-                        </StackPanel>
-                    </Button>
+                        <Button Style="{StaticResource NavButtonStyle}"
+                                Command="{Binding NavigateToDashboardCommand}">
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="📊" FontSize="18" Margin="0,0,12,0" Foreground="{StaticResource SecondaryBrush}"/>
+                                <TextBlock Text="Dashboard"/>
+                            </StackPanel>
+                        </Button>
 
-                    <TextBlock Text="GESTIÓN" FontSize="10" FontWeight="Bold" Foreground="#475569"
-                               Margin="20,16,0,8"/>
+                        <!-- Sección Gestión -->
+                        <TextBlock Text="GESTIÓN" FontSize="11" FontWeight="Bold" Foreground="{StaticResource TextSecondaryBrush}"
+                                   Margin="24,24,0,8"/>
 
-                    <Button Style="{StaticResource NavButtonStyle}"
-                            Command="{Binding NavigateToCustomersCommand}">
-                        <StackPanel Orientation="Horizontal">
-                            <TextBlock Text="👥" FontSize="16" Margin="0,0,12,0"/>
-                            <TextBlock Text="Clientes"/>
-                        </StackPanel>
-                    </Button>
-                    <Button Style="{StaticResource NavButtonStyle}"
-                            Command="{Binding NavigateToProductsCommand}">
-                        <StackPanel Orientation="Horizontal">
-                            <TextBlock Text="📦" FontSize="16" Margin="0,0,12,0"/>
-                            <TextBlock Text="Productos"/>
-                        </StackPanel>
-                    </Button>
-                    <Button Style="{StaticResource NavButtonStyle}"
-                            Command="{Binding NavigateToInvoicesCommand}">
-                        <StackPanel Orientation="Horizontal">
-                            <TextBlock Text="🧾" FontSize="16" Margin="0,0,12,0"/>
-                            <TextBlock Text="Facturas"/>
-                        </StackPanel>
-                    </Button>
-                    <Button Style="{StaticResource NavButtonStyle}"
-                            Command="{Binding NavigateToPaymentsCommand}">
-                        <StackPanel Orientation="Horizontal">
-                            <TextBlock Text="💳" FontSize="16" Margin="0,0,12,0"/>
-                            <TextBlock Text="Pagos"/>
-                        </StackPanel>
-                    </Button>
+                        <Button Style="{StaticResource NavButtonStyle}"
+                                Command="{Binding NavigateToCustomersCommand}">
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="👥" FontSize="18" Margin="0,0,12,0" Foreground="{StaticResource SecondaryBrush}"/>
+                                <TextBlock Text="Clientes"/>
+                            </StackPanel>
+                        </Button>
+                        <Button Style="{StaticResource NavButtonStyle}"
+                                Command="{Binding NavigateToProductsCommand}">
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="📦" FontSize="18" Margin="0,0,12,0" Foreground="{StaticResource SecondaryBrush}"/>
+                                <TextBlock Text="Productos"/>
+                            </StackPanel>
+                        </Button>
+                        
+                        <!-- Separador visual de documentos -->
+                        <Border Height="1" Background="{StaticResource BorderBrush}" Margin="24,12"/>
 
-                    <TextBlock Text="ANÁLISIS" FontSize="10" FontWeight="Bold" Foreground="#475569"
-                               Margin="20,16,0,8"/>
+                        <Button Style="{StaticResource NavButtonStyle}"
+                                Command="{Binding NavigateToInvoicesCommand}">
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="🧾" FontSize="18" Margin="0,0,12,0" Foreground="{StaticResource PrimaryBrush}"/>
+                                <TextBlock Text="Facturas"/>
+                            </StackPanel>
+                        </Button>
+                        <Button Style="{StaticResource NavButtonStyle}"
+                                Command="{Binding NavigateToPaymentsCommand}">
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="💳" FontSize="18" Margin="0,0,12,0" Foreground="{StaticResource SecondaryBrush}"/>
+                                <TextBlock Text="Pagos"/>
+                            </StackPanel>
+                        </Button>
 
-                    <Button Style="{StaticResource NavButtonStyle}"
-                            Command="{Binding NavigateToReportsCommand}">
-                        <StackPanel Orientation="Horizontal">
-                            <TextBlock Text="📈" FontSize="16" Margin="0,0,12,0"/>
-                            <TextBlock Text="Reportes"/>
-                        </StackPanel>
-                    </Button>
-                    <Button Style="{StaticResource NavButtonStyle}"
-                            Command="{Binding NavigateToSettingsCommand}">
-                        <StackPanel Orientation="Horizontal">
-                            <TextBlock Text="⚙️" FontSize="16" Margin="0,0,12,0"/>
-                            <TextBlock Text="Configuración"/>
-                        </StackPanel>
-                    </Button>
-                </StackPanel>
+                        <!-- Sección Análisis -->
+                        <TextBlock Text="ANÁLISIS E INFORMES" FontSize="11" FontWeight="Bold" Foreground="{StaticResource TextSecondaryBrush}"
+                                   Margin="24,24,0,8"/>
+
+                        <Button Style="{StaticResource NavButtonStyle}"
+                                Command="{Binding NavigateToReportsCommand}">
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="📈" FontSize="18" Margin="0,0,12,0" Foreground="{StaticResource SecondaryBrush}"/>
+                                <TextBlock Text="Reportes Generales"/>
+                            </StackPanel>
+                        </Button>
+                        <Button Style="{StaticResource NavButtonStyle}"
+                                Command="{Binding NavigateToSettingsCommand}">
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="⚙️" FontSize="18" Margin="0,0,12,0" Foreground="{StaticResource SecondaryBrush}"/>
+                                <TextBlock Text="Configuración"/>
+                            </StackPanel>
+                        </Button>
+                    </StackPanel>
+                </ScrollViewer>
 
             </DockPanel>
         </Border>
 
-        <!-- ═══════ MAIN CONTENT AREA ═══════ -->
-        <Grid Grid.Column="1">
+        <!-- ═══════ MAIN CONTENT AREA (Fondo Crema) ═══════ -->
+        <Grid Grid.Column="1" Background="{StaticResource SurfaceBrush}">
             <Grid.RowDefinitions>
-                <RowDefinition Height="64"/>
+                <RowDefinition Height="72"/>
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
 
-            <!-- Top Bar -->
-            <Border Grid.Row="0" Background="White" BorderBrush="#E2E8F0" BorderThickness="0,0,0,1" Padding="28,0">
+            <!-- Top Bar Transparente / Fundida con el fondo -->
+            <Border Grid.Row="0" Padding="32,0">
                 <Grid>
-                    <TextBlock Text="{Binding CurrentModule}" FontSize="20" FontWeight="Bold"
+                    <TextBlock Text="{Binding CurrentModule}" FontSize="24" FontWeight="Bold"
                                Foreground="{StaticResource TextPrimaryBrush}" VerticalAlignment="Center"/>
-                    <TextBlock HorizontalAlignment="Right" VerticalAlignment="Center"
-                               FontSize="13" Foreground="#94A3B8">
-                        <TextBlock.Text>
-                            <Binding Source="{x:Static sys:DateTime.Now}" StringFormat="{}{0:dddd, d MMMM yyyy}"/>
-                        </TextBlock.Text>
-                    </TextBlock>
+                    
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Center">
+                        <!-- Fecha en la barra superior -->
+                        <Border Background="White" CornerRadius="20" Padding="16,8" Margin="0,0,16,0" BorderBrush="{StaticResource BorderBrush}" BorderThickness="1">
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="📅" Margin="0,0,8,0"/>
+                                <TextBlock FontSize="13" Foreground="{StaticResource TextSecondaryBrush}" FontWeight="SemiBold">
+                                    <TextBlock.Text>
+                                        <Binding Source="{x:Static sys:DateTime.Now}" StringFormat="{}{0:dddd, d MMMM yyyy}"/>
+                                    </TextBlock.Text>
+                                </TextBlock>
+                            </StackPanel>
+                        </Border>
+                        
+                        <Button Style="{StaticResource PrimaryButtonStyle}" Padding="16,8" FontSize="13">
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="+ Nueva Venta" FontWeight="Bold"/>
+                            </StackPanel>
+                        </Button>
+                    </StackPanel>
                 </Grid>
             </Border>
 
-            <!-- Content Placeholder -->
-            <Border Grid.Row="1" Background="{StaticResource SurfaceBrush}" Padding="28">
-                <Border Background="White" CornerRadius="12" Padding="32">
-                    <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
-                        <TextBlock Text="🚀" FontSize="64" HorizontalAlignment="Center" Margin="0,0,0,16"/>
+            <!-- Content Placeholder (Tarjetas flotantes blancas) -->
+            <Border Grid.Row="1" Padding="32,8,32,32">
+                <!-- Se usa el estilo base de Tarjeta Blanca sobre el fondo Crema -->
+                <Border Style="{StaticResource CardStyle}" VerticalAlignment="Center" HorizontalAlignment="Center">
+                    <StackPanel Margin="40">
+                        <!-- Círculo Naranja decorativo -->
+                        <Border Background="#FFF5EC" Width="100" Height="100" CornerRadius="50" HorizontalAlignment="Center" Margin="0,0,0,24">
+                            <TextBlock Text="🚀" FontSize="48" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                        
                         <TextBlock Text="{Binding CurrentModule}" FontSize="28" FontWeight="Bold"
-                                   HorizontalAlignment="Center" Foreground="{StaticResource TextPrimaryBrush}" Margin="0,0,0,8"/>
-                        <TextBlock Text="Módulo disponible próximamente"
-                                   HorizontalAlignment="Center" Foreground="#94A3B8" FontSize="14"/>
+                                   HorizontalAlignment="Center" Foreground="{StaticResource TextPrimaryBrush}" Margin="0,0,0,12"/>
+                        <TextBlock Text="Este módulo está siendo desarrollado y se integrará en breve."
+                                   HorizontalAlignment="Center" Foreground="{StaticResource TextSecondaryBrush}" FontSize="15" Margin="0,0,0,32"/>
+                                   
+                        <Button Content="Regresar al Dashboard" Style="{StaticResource GhostButtonStyle}" HorizontalAlignment="Center"
+                                Command="{Binding NavigateToDashboardCommand}"/>
                     </StackPanel>
                 </Border>
             </Border>
